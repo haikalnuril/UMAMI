@@ -9,6 +9,9 @@ class AuthController {
     static function index(){
         view('auth/landingpage', ['url' => 'index']);
     }
+    static function restricted(){
+        view('restricted',['url'=> 'restricted']);
+    }
     static function login(){
         view('auth/login', ['url' => 'login']);
     }
@@ -24,8 +27,18 @@ class AuthController {
         ]);
         if ($user) {
             unset($user['password']);
-            $_SESSION['user'] = $user;
-            header('Location: dashboard-admin');
+            if($user['role_id'] == '1'){
+                $_SESSION['user'] = $user;
+                header('Location: dashboard-admin');
+            }
+            elseif($user['role_id'] == '2'){
+                $_SESSION['user'] = $user;
+                header('Location: dashboard-writer');
+            }
+            elseif($user['role_id'] == '3'){
+                $_SESSION['user'] = $user;
+                header('Location: dashboard');
+            }
         }
         else {
             header('Location: '.BASEURL.'login?failed=true');
