@@ -1,6 +1,8 @@
 <?php
 
 include_once 'models/users.php';
+include_once 'models/recipes.php';
+include_once 'models/categories.php';
 include_once 'function/main.php';
 include_once 'app/config/static.php';
 
@@ -11,6 +13,9 @@ class AuthController {
     }
     static function restricted(){
         view('restricted',['url'=> 'restricted']);
+    }
+    static function resep(){
+        view('resep',['url'=> 'resep', 'recipes' => Recipe::finds($_GET['slug']), 'users' => User::select($_SESSION['user']['id']), 'category' => Category::select($_SESSION['user']['id'])]);
     }
     static function login(){
         view('auth/login', ['url' => 'login']);

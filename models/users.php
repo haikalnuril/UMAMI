@@ -52,4 +52,18 @@ class User
         $result = $stmt->affected_rows > 0 ? true : false;
         return $result;
     }
+    static function select(){
+        global $conn;
+        $sql = "SELECT * FROM users";
+
+        $result = $conn->query($sql);
+        $arr = [];
+
+        if($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()){
+                $arr[] = $row;
+            }
+        }
+        return $arr;
+    }
 }
