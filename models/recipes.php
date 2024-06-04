@@ -124,6 +124,30 @@ class Recipe{
             }
         }
     }
+    static function update($judul, $slug, $penulis, $alatBahan, $langkah, $category_id) {
+        global $conn;
+    
+        $oldSlug = $_POST['oldSlug'];
+    
+        // Prepare the SQL statement
+        $stmt = $conn->prepare("UPDATE recipes SET judul = ?, slug = ?, penulis = ?, alatBahan = ?, langkah = ?, category_id = ? WHERE slug = ?");
+    
+        // Bind the parameters to the SQL query
+        $stmt->bind_param("sssssis", $judul, $slug, $penulis, $alatBahan, $langkah, $category_id, $oldSlug);
+    
+        // Execute the query
+        $hasil = $stmt->execute();
+    
+        if ($hasil) {
+            return $hasil;
+        } else {
+            echo "Gagal mengupdate data";
+        }
+    
+        // Close the statement
+        $stmt->close();
+    }
+
     static function destroy($id){
         global $conn;
 

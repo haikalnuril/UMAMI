@@ -41,14 +41,38 @@ class WriterController{
             // urlpath('dashboard-writer/show');
             // view('writer/show', ['url' => 'dashboard-writer/show', 'shows' => Recipe::show($_SESSION['user']['username']), 'category' => Category::select($_SESSION['user']['id'])]);
             
-            header('Location:' .BASEURL. 'dashboard-writer/show');
-            // if ($recipe) {
-            //     // header('Location: dashboard-writer/show');
-            //     // exit();
-            // // }else{
-            // //     // header('Location: dashboard-writer/show');
-            // //     echo ('Terjadi Kesalahan');
-            // }
+            if ($recipe) {
+                header('Location:' .BASEURL. 'dashboard-writer/show');
+                // header('Location: dashboard-writer/show');
+                exit();
+            }else{
+                echo ('Terjadi Kesalahan');
+            }
+        }
+    }
+    static function edit(){
+        view('writer/edit', ['url' => 'dashboard-writer/edit', 'recipe' => Recipe::finds($_GET['slug']), 'users' => User::select($_SESSION['user']['id']), 'categories' => Category::select($_SESSION['user']['id'])]);
+    }
+    static function update(){
+        if (!isset($_SESSION['user'])) {
+            header('Location: login');
+        }else{
+            // var_dump($recipe['slug']);
+            $post = array_map('htmlspecialchars', $_POST);
+            $recipe = Recipe::update(
+                $post['judul'],
+                $post['slug'],
+                $_SESSION['user']['id'],
+                $post['alat'],
+                $post['langkah'],
+                $post['category_id'],
+            );
+            if ($recipe) {
+                header('Location:' .BASEURL. 'dashboard-writer/show');
+                exit();
+            } else {
+                echo ('Terjadi Kesalahan');
+            }
         }
     }
     static function delete(){
