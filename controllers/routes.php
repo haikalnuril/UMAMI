@@ -17,6 +17,7 @@ Router::url('logout', 'get', 'AuthController::logout');
 
 //dashboard admin
 Router::url('dashboard-admin', 'get', 'AdminController::index');
+Router::url('dashboard-admin/laporan', 'get', 'AdminController::laporan');
 
 //dashboard writer
 Router::url('dashboard-writer', 'get', 'WriterController::index');

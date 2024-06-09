@@ -8,6 +8,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 </head>
 <body>
+    <div>
+        <a href="<?= urlpath('dashboard-admin/laporan')?>">Laporan</a>
+    </div>
     <div class="grid grid-cols-5 gap-3 mx-5 mt-10">
         <?php
         $i = 1;
