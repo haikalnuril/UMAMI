@@ -14,7 +14,7 @@
 </head>
 <body>
     <div>
-        <form action="<?= urlpath('dashboard-writer/edit') ?>" method="post">
+        <form action="<?= urlpath('dashboard-writer/edit') ?>" method="post" enctype="multipart/form-data">
             <div>
                 <label for="judul">Judul Resep Anda:</label>
                 <input type="text" name="judul" id="judul" placeholder="Judul Anda..." value="<?= $recipe[0]['judul'] ?>" required>
@@ -35,17 +35,37 @@
             <div>
                 <label for="alat">Alat dan Bahan</label>
                 <input type="hidden" name="alat" id="alat" value="<?= $recipe[0]['alatBahan'] ?>">
-                <?php $cleanText = strip_tags($recipe[0]['alatBahan']) ?>
-                <trix-editor input="alat" class="mt-3 bg-white"><?= $recipe[0]['alatBahan'] ?></trix-editor>
+                <?php $cleanText = html_entity_decode($recipe[0]['alatBahan']); 
+                $cleanText = strip_tags($cleanText)?>
+                <trix-editor input="alat" class="mt-3 bg-white"><?= $cleanText ?></trix-editor>
             </div>
             <div>
                 <label for="langkah">Langkah-Langkah Pembuatan</label>
                 <input type="hidden" name="langkah" id="langkah" value="<?= $recipe[0]['langkah'] ?>">
-                <?php $cleanText = strip_tags($recipe[0]['langkah']) ?>
+                <?php $cleanText = html_entity_decode($recipe[0]['langkah']);
+                 $cleanText = strip_tags($cleanText) ?>
                 <trix-editor input="langkah" class="mt-3 bg-white"><?= $cleanText ?></trix-editor>
+            </div>
+            <div>
+                <label for="gambar">Gambar</label>
+                <input type="hidden" name="oldGambar" id="oldGambar" value="<?= $recipe[0]['gambar'] ?>">
+                <br>
+                <?php if($recipe[0]['gambar']){?>
+                <img src="<?= urlpath('assets/images/'.$recipe[0]['gambar']) ?>" id="frame" style="width: 500px; height: 300px;">
+                <?php } else{ ?>
+                <br>
+                <img style="width: 500px; height: 300px;" id="frame">
+                <?php } ?>
+                <br>
+                <input type="file" name="gambar" id="gambar" onchange="preview()">
             </div>
             <button type="submit">Update</button>
         </form>
     </div>
+    <script>
+            function preview(){
+                frame.src= URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
 </body>
 </html>

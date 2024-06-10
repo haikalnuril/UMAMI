@@ -95,8 +95,57 @@ class WriterController{
         if (!isset($_SESSION['user'])) {
             header('Location: login');
         }else{
+            
+
             // var_dump($recipe['slug']);
             $post = array_map('htmlspecialchars', $_POST);
+            $oldSlug = $_POST['oldSlug'];
+            $currentImageName = recipe::getImageName($oldSlug);
+
+            if ($_FILES['gambar']['error'] === UPLOAD_ERR_OK) {
+                $gambarName = $_FILES['gambar']['name'];
+                $gambarTmpName = $_FILES['gambar']['tmp_name'];
+                $gambarSize = $_FILES['gambar']['size'];
+                $gambarType = $_FILES['gambar']['type'];
+    
+                // Check if the uploaded file is an image
+                $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+                if (!in_array($gambarType, $allowedTypes)) {
+                    setFlashMessage('error', 'File yang diupload harus berupa gambar');
+                    return;
+                }
+    
+                // Define the directory to save the uploaded image
+                $uploadDir = __DIR__ . '/../assets/images/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+    
+                // Generate a new unique file name with current timestamp
+                $timestamp = time();
+                $fileExtension = pathinfo($gambarName, PATHINFO_EXTENSION);
+                $newFileName = basename($gambarName, ".$fileExtension") . "_" . $timestamp . ".$fileExtension";
+                $gambarPath = $uploadDir . $newFileName;
+    
+                // Delete the old image if it exists
+                if (!empty($currentImageName)) {
+                    $oldImagePath = $uploadDir . $currentImageName;
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+    
+                // Move the uploaded image to the specified directory
+                if (move_uploaded_file($gambarTmpName, $gambarPath)) {
+                    $post['gambar'] = $newFileName; // Store only the file name in the database
+                } else {
+                    echo 'Gagal mengupload gambar';
+                    return;
+                }
+            } else {
+                // If no new image is uploaded, keep the current image name
+                $post['gambar'] = $currentImageName;
+            }
             $recipe = Recipe::update(
                 $post['judul'],
                 $post['slug'],
@@ -104,6 +153,7 @@ class WriterController{
                 $post['alat'],
                 $post['langkah'],
                 $post['category_id'],
+                $post['gambar']
             );
             if ($recipe) {
                 header('Location:' .BASEURL. 'dashboard-writer/show');

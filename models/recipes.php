@@ -124,16 +124,16 @@ class Recipe{
             }
         }
     }
-    static function update($judul, $slug, $penulis, $alatBahan, $langkah, $category_id) {
+    static function update($judul, $slug, $penulis, $alatBahan, $langkah, $category_id, $gambar) {
         global $conn;
     
         $oldSlug = $_POST['oldSlug'];
     
         // Prepare the SQL statement
-        $stmt = $conn->prepare("UPDATE recipes SET judul = ?, slug = ?, penulis = ?, alatBahan = ?, langkah = ?, category_id = ? WHERE slug = ?");
+        $stmt = $conn->prepare("UPDATE recipes SET judul = ?, slug = ?, penulis = ?, alatBahan = ?, langkah = ?, category_id = ?, gambar = ? WHERE slug = ?");
     
         // Bind the parameters to the SQL query
-        $stmt->bind_param("sssssis", $judul, $slug, $penulis, $alatBahan, $langkah, $category_id, $oldSlug);
+        $stmt->bind_param("sssssiss", $judul, $slug, $penulis, $alatBahan, $langkah, $category_id, $gambar, $oldSlug);
     
         // Execute the query
         $hasil = $stmt->execute();
@@ -159,5 +159,18 @@ class Recipe{
         } else {
             echo "Gagal menghapus data";
         }
+    }
+    public static function getImageName($slug)
+    {
+        global $conn;
+
+        $sql = "SELECT gambar FROM recipes WHERE slug = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $slug);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        return $row['gambar'];
     }
 }
