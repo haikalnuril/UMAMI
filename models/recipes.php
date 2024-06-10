@@ -108,12 +108,12 @@ class Recipe{
 
         return $arr;
     }
-    static function insert($judul, $slug, $penulis, $alatBahan, $langkah, $category_id) {
+    static function insert($judul, $slug, $penulis, $alatBahan, $langkah, $category_id, $gambar) {
         global $conn;
 
         // $penulis = $_SESSION['user']['id'];
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $sql = "INSERT INTO recipes (judul, slug, penulis, alatBahan, langkah, category_id) VALUES ('$judul', '$slug', '$penulis', '$alatBahan', '$langkah', '$category_id')";
+            $sql = "INSERT INTO recipes (judul, slug, penulis, alatBahan, langkah, category_id, gambar) VALUES ('$judul', '$slug', '$penulis', '$alatBahan', '$langkah', '$category_id', '$gambar')";
 
             $hasil = mysqli_query($conn, $sql);
 

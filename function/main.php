@@ -51,39 +51,39 @@
 //     return BASEURL . $path;
 // }
 
-// function setFlashMessage( $type, $message )
-//  {
-//     if ( !isset( $_SESSION[ 'user' ] ) ) {
-//         $_SESSION[ 'guest_' . $type ] = $message;
-//     } else {
-//         $_SESSION[ $type . '_' . $_SESSION[ 'user' ][ 'id' ] ] = $message;
-//     }
-// }
+function setFlashMessage( $type, $message )
+ {
+    if ( !isset( $_SESSION[ 'user' ] ) ) {
+        $_SESSION[ 'guest_' . $type ] = $message;
+    } else {
+        $_SESSION[ $type . '_' . $_SESSION[ 'user' ][ 'id' ] ] = $message;
+    }
+}
 
-// function displayFlashMessages( $type )
-//  {
-//     if ( !isset( $_SESSION[ 'user' ] ) ) {
-//         $messageKey = 'guest_' . $type;
-//         if ( isset( $_SESSION[ $messageKey ] ) ) {
-//             echo '<div class="alert alert-' . $type . ' alert-dismissible fade show absolute" role="alert">';
-//             echo $_SESSION[ $messageKey ];
-//             echo '<button type="button" class="btn-close custom-close-button" data-bs-dismiss="alert" aria-label="Close">';
-//             echo '</button>';
-//             echo '</div>';
-//             unset( $_SESSION[ $messageKey ] );
-//         }
-//     } else {
-//         $messageKey = $type . '_' . $_SESSION[ 'user' ][ 'id' ];
-//         if ( isset( $_SESSION[ $messageKey ] ) ) {
-//             echo '<div class="alert alert-' . $type . ' alert-dismissible fade show absolute" role="alert">';
-//             echo $_SESSION[ $messageKey ];
-//             echo '<button type="button" class="btn-close custom-close-button" data-bs-dismiss="alert" aria-label="Close">';
-//             echo '</button>';
-//             echo '</div>';
-//             unset( $_SESSION[ $messageKey ] );
-//         }
-//     }
-// }
+function displayFlashMessages( $type )
+ {
+    if ( !isset( $_SESSION[ 'user' ] ) ) {
+        $messageKey = 'guest_' . $type;
+        if ( isset( $_SESSION[ $messageKey ] ) ) {
+            echo '<div class="alert alert-' . $type . ' alert-dismissible fade show absolute" role="alert">';
+            echo $_SESSION[ $messageKey ];
+            echo '<button type="button" class="btn-close custom-close-button" data-bs-dismiss="alert" aria-label="Close">';
+            echo '</button>';
+            echo '</div>';
+            unset( $_SESSION[ $messageKey ] );
+        }
+    } else {
+        $messageKey = $type . '_' . $_SESSION[ 'user' ][ 'id' ];
+        if ( isset( $_SESSION[ $messageKey ] ) ) {
+            echo '<div class="alert alert-' . $type . ' alert-dismissible fade show absolute" role="alert">';
+            echo $_SESSION[ $messageKey ];
+            echo '<button type="button" class="btn-close custom-close-button" data-bs-dismiss="alert" aria-label="Close">';
+            echo '</button>';
+            echo '</div>';
+            unset( $_SESSION[ $messageKey ] );
+        }
+    }
+}
 
 // function compressToWebP( $source, $destination, $quality = 20 ) {
 //     $info = getimagesize( $source );

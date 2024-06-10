@@ -30,13 +30,51 @@ class WriterController{
             $post = array_map('htmlspecialchars', $_POST);
             // var_dump($post);
             // echo "<script>console.log('Debug Objects:  test' );</script>";
+            if ($_FILES['gambar']['error'] === UPLOAD_ERR_OK) {
+                $gambarName = $_FILES['gambar']['name'];
+                $gambarTmpName = $_FILES['gambar']['tmp_name'];
+                $gambarSize = $_FILES['gambar']['size'];
+                $gambarType = $_FILES['gambar']['type'];
+    
+                // Check if the uploaded file is an image
+                $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+                if (!in_array($gambarType, $allowedTypes)) {
+                    setFlashMessage('error', 'File yang diupload harus berupa gambar');
+                    return;
+                }
+    
+                // Define the directory to save the uploaded image
+                $uploadDir = __DIR__ . '/../assets/images/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+    
+                // Generate a new unique file name with current timestamp
+                $timestamp = time();
+                $fileExtension = pathinfo($gambarName, PATHINFO_EXTENSION);
+                $newFileName = basename($gambarName, ".$fileExtension") . "_" . $timestamp . ".$fileExtension";
+                $gambarPath = $uploadDir . $newFileName;
+    
+                // Move the uploaded image to the specified directory
+                if (move_uploaded_file($gambarTmpName, $gambarPath)) {
+                    $post['gambar'] = $newFileName; // Store only the file name in the database
+                } else {
+                    echo 'Gagal mengupload gambar';
+                    return;
+                }
+            } else {
+                echo 'Terjadi kesalahan saat mengupload gambar';
+                return;
+            }
+
             $recipe = Recipe::insert(
                 $post['judul'],
                 $post['slug'],
                 $_SESSION['user']['id'],
                 $post['alat'],
                 $post['langkah'],
-                $post['category_id']
+                $post['category_id'],
+                $post['gambar']
             );
             // urlpath('dashboard-writer/show');
             // view('writer/show', ['url' => 'dashboard-writer/show', 'shows' => Recipe::show($_SESSION['user']['username']), 'category' => Category::select($_SESSION['user']['id'])]);

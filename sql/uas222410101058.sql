@@ -51,7 +51,9 @@ CREATE TABLE `writers` (
 
 INSERT INTO `writers` (`id`, `user_id`, `name`, `phone`, `created_at`) VALUES
 (1, 2, 'Jetro Sulthan', '0831033410568', '2024-05-22 10:28:23'),
-(2, 3, 'Haikal Nuril', '0895370577773', '2024-05-22 12:48:53');
+(2, 3, 'Haikal Nuril', '0895370577773', '2024-05-22 12:48:53'),
+
+
 
 -- ----------------------------------------------------------------------------------------------------------
 
@@ -91,7 +93,8 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `role_id`, `created_
 (2, 'Jeje', '$2y$12$ns.mhAYJbarTI/F3wM3ZWOdveeyZupm/2ArVchCyMABImR/GVDAhy', 'jetrosulthan@gmail.com', 2, '2024-05-22 10:28:23', '2024-05-22 10:28:23'),
 (3, 'nuril', '$2y$12$e1jD42aY5CvPVQdnJT0RzelcSWIBnOsST1UbkKc51F1lubPP60X46', 'haikal.nuril23@gmail.com', 2, '2024-05-22 12:48:53', '2024-05-22 12:48:53'),
 (4, 'haikal', '$2y$12$YJhurfxjQn8PkBbyep2mgOp3t4ofGSNrXVvHnDr2b0mFbEbrCaXyC', 'haikalteroris@gmail.com', 3, '2024-05-23 06:04:05', '2024-05-23 06:04:05'),
-(5, 'jo', '$2y$12$MjibErpURSjL.4O7Q31eDOP75oBhMpy662LBClQL1.JE/0tBmPgVW', 'rafijoe@gmail.com', 3, '2024-05-23 07:08:40', '2024-05-23 07:08:40');
+(5, 'jo', '$2y$12$MjibErpURSjL.4O7Q31eDOP75oBhMpy662LBClQL1.JE/0tBmPgVW', 'rafijoe@gmail.com', 3, '2024-05-23 07:08:40', '2024-05-23 07:08:40'),
+;
 
 -- ----------------------------------------------------------------------------------------------------------
 -- table structure for table `category`
@@ -128,7 +131,8 @@ INSERT INTO `comments` (`id`, `recipe_id`, `user_id`, `comment`, `created_at`) V
 (2, 2, 5, 'Pakcoy tumis bawang putih ini sangat lezat. Cocok untuk makan siang', '2024-05-22 12:48:53'),
 (3, 3, 4, 'Salad edamame rumput laut ini sangat segar. Cocok untuk makan malam', '2024-05-20 09:28:23'),
 (4, 4, 5, 'Teh susu jahe merah ini sangat hangat. Cocok untuk minum malam', '2024-05-20 09:28:23'),
-(5, 5, 4, 'Keripik bayam renyah ini sangat renyah. Cocok untuk cemilan', '2024-05-20 09:28:23') 
+(5, 5, 4, 'Keripik bayam renyah ini sangat renyah. Cocok untuk cemilan', '2024-05-20 09:28:23'),
+ 
 
 -- ----------------------------------------------------------------------------------------------------------
 -- table structure for table `post`
@@ -222,4 +226,5 @@ INSERT INTO `recipes` (`id`, `judul`, `slug`, `penulis`, `alatBahan`, `langkah`,
 3. Buat adonan tepung beras dan tepung kanji dengan air secukupnya. Tambahkan bumbu yang sudah dihaluskan. Tambahkan air hingga encer. Untuk adonan kripik bayam jangan terlalu kental ya bund, nanti jadi kurang kriuk,
 4. Panaskan minyak, setelah panas, kecilkan apinya. Celupkan daun bayam satu persatu. Goreng sampai kuning keemasan,
 5.Setelah dingin, simpan keripik bayam di wadah tertutup',
-5)
+5),
+()
