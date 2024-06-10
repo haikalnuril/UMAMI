@@ -111,6 +111,26 @@ INSERT INTO `categories` (`id`, `nama`) VALUES
 (5, 'lainnya')
 
 -- ----------------------------------------------------------------------------------------------------------
+-- table structure for table `comment`
+
+CREATE TABLE `comments` (
+    `id` bigint UNSIGNED NOT NULL,
+    `recipe_id` bigint UNSIGNED NOT NULL,
+    `user_id` bigint UNSIGNED NOT NULL,
+    `comment` text NOT NULL,
+    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- seeding database comment
+
+INSERT INTO `comments` (`id`, `recipe_id`, `user_id`, `comment`, `created_at`) VALUES
+(1, 1, 4, 'Wah, kue brownies spesial ini sangat enak. Saya suka sekali', '2024-05-20 09:28:23'),
+(2, 2, 5, 'Pakcoy tumis bawang putih ini sangat lezat. Cocok untuk makan siang', '2024-05-22 12:48:53'),
+(3, 3, 4, 'Salad edamame rumput laut ini sangat segar. Cocok untuk makan malam', '2024-05-20 09:28:23'),
+(4, 4, 5, 'Teh susu jahe merah ini sangat hangat. Cocok untuk minum malam', '2024-05-20 09:28:23'),
+(5, 5, 4, 'Keripik bayam renyah ini sangat renyah. Cocok untuk cemilan', '2024-05-20 09:28:23') 
+
+-- ----------------------------------------------------------------------------------------------------------
 -- table structure for table `post`
 
 CREATE TABLE `recipes` (

@@ -7,6 +7,7 @@ include_once 'controllers/main.php';
 Router::url('index', 'get', 'AuthController::index');
 Router::url('restricted', 'get', 'AuthController::restricted');
 Router::url('resep', 'get', 'AuthController::resep');
+Router::url('resep', 'post', 'AuthController::comment');
 
 //auth
 Router::url('login', 'get', 'AuthController::login');

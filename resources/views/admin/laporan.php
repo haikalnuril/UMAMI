@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chart.js Example</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 </head>
 <body>
     <div class="graphContainer w-[80%] bg-white shadow-xl p-4 rounded-2xl" style="width: 80%; background-color: white; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); padding: 4px; border-radius: 20px;">
@@ -56,7 +57,7 @@
                             'lightgreen',
                             'lightyellow',
                             'lightcoral',
-                            'lightpink',
+                            'rgba(238,130,238)',
                             'lightgray'
                         ],
                         borderColor: [
