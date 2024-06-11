@@ -11,7 +11,7 @@ class AdminController{
         $user = $_SESSION['user'];
         $user_role = $user['role_id'];
         if ($user_role == '1'){
-            view('admin/dashboard', ['url' => 'dashboard-admin','recipes' => Recipe::select($_SESSION['user']['id']), 'users' => User::select($_SESSION['user']['id'])]);
+            view('admin/dashboard', ['url' => 'dashboard-admin','recipes' => Recipe::select($_SESSION['user']['id']), 'users' => User::select($_SESSION['user']['id']), 'categories' => Category::select($_SESSION['user']['id'])]);
         }
         else{
             header('location: restricted');

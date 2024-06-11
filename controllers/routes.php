@@ -8,6 +8,7 @@ Router::url('index', 'get', 'AuthController::index');
 Router::url('restricted', 'get', 'AuthController::restricted');
 Router::url('resep', 'get', 'AuthController::resep');
 Router::url('resep', 'post', 'AuthController::comment');
+Router::url('back', 'get', 'AuthController::back');
 
 //auth
 Router::url('login', 'get', 'AuthController::login');
@@ -35,16 +36,16 @@ Router::url('dashboard', 'get', 'ReaderController::index');
 
 Router::url('/', 'get', function () {
     if (isset($_SESSION['user']['role_id']) == '2') {
-        header('Location: dashboard-writer');
+        header('Location:' .BASEURL. 'dashboard-writer');
     } 
     elseif (isset($_SESSION['user']['role_id']) == '1') {
-        header('Location: dashboard-admin');
+        header('Location:' .BASEURL. 'dashboard-admin');
     }
     elseif (isset($_SESSION['user']['role_id']) == '3') {
-        header('Location: dashboard');
+        header('Location:' .BASEURL. 'dashboard');
     }
     else {
-        header('Location: index');
+        header('Location:' .BASEURL. 'index');
     }
 });
 

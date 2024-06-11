@@ -69,4 +69,19 @@ class AuthController {
             header('Location: '.BASEURL.'login?failed=true');
         }
     }
+    static function back(){
+        $user_role = $_SESSION['user']['role_id'];
+        if ($user_role == '2') {
+            header('Location:' .BASEURL. 'dashboard-writer');
+        }
+        elseif ($user_role == '1') {
+            header('Location:' .BASEURL. 'dashboard-admin');
+        }
+        elseif ($user_role == '3') {
+            header('Location:' .BASEURL. 'dashboard');
+        }
+        else {
+            header('Location:' .BASEURL. 'index');
+        }
+    }
 }

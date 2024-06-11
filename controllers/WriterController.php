@@ -10,14 +10,28 @@ class WriterController{
         $user = $_SESSION['user'];
         $user_role = $user['role_id'];
         if($user_role == '2'){
-            view('writer/index', ['url' => 'dashboard-writer']);
+            view('writer/index', ['url' => 'dashboard-writer', 'recipes' => Recipe::select($_SESSION['user']['id']), 'users' => User::select($_SESSION['user']['id']), 'categories' => Category::select($_SESSION['user']['id'])]);
         }else{
             header('location: restricted');
         }
     }
 
     static function show(){
-        view('writer/show', ['url' => 'dashboard-writer/show', 'shows' => Recipe::show($_SESSION['user']['username']), 'category' => Category::select($_SESSION['user']['id'])]);
+        $user_role = $_SESSION['user']['role_id'];
+        if($user_role == '2'){
+            view('writer/show', ['url' => 'dashboard-writer/show', 'shows' => Recipe::show($_SESSION['user']['username']), 'category' => Category::select($_SESSION['user']['id'])]);
+        }
+        elseif($user_role == '1'){
+            header('location:' .BASEURL. 'dashboard-admin');
+            // view('admin/dashboard', ['url' => 'dashboard-admin', 'recipes' => Recipe::select($_SESSION['user']['id']), 'users' => User::select($_SESSION['user']['id']), 'categories' => Category::select($_SESSION['user']['id'])]);
+        }
+        elseif($user_role == '3'){
+            header('location:' .BASEURL. 'dashboard');
+            // view('dashboard', ['url' => 'dashboard', 'recipes' => Recipe::select($_SESSION['user']['id']), 'users' => User::select($_SESSION['user']['id']), 'categories' => Category::select($_SESSION['user']['id'])]);
+        }
+        else{
+            view('restricted');
+        }
     }
     static function create(){
         view('writer/create', ['url' => 'dashboard-writer/create', 'categories' => Category::select($_SESSION['user']['id'])]);

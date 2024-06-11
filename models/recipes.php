@@ -150,15 +150,34 @@ class Recipe{
 
     static function destroy($id){
         global $conn;
+    
+    // Start a transaction
+    $conn->begin_transaction();
+    try {
+        // Delete comments related to the recipe
+        $sqlComments = "DELETE FROM comments WHERE recipe_id = ?";
+        $stmtComments = $conn->prepare($sqlComments);
+        $stmtComments->bind_param('i', $id);
+        $stmtComments->execute();
+        $stmtComments->close();
 
-        $sql = "DELETE FROM recipes WHERE id = $id";
-        $hasil = $conn->query($sql);
+        // Delete the recipe
+        $sqlRecipe = "DELETE FROM recipes WHERE id = ?";
+        $stmtRecipe = $conn->prepare($sqlRecipe);
+        $stmtRecipe->bind_param('i', $id);
+        $stmtRecipe->execute();
+        $stmtRecipe->close();
 
-        if($hasil){
-            return $hasil;
-        } else {
-            echo "Gagal menghapus data";
-        }
+        // Commit the transaction
+        $conn->commit();
+
+        return true;
+    } catch (Exception $e) {
+        // Rollback the transaction if something goes wrong
+        $conn->rollback();
+        echo "Failed to delete data: " . $e->getMessage();
+        return false;
+    }
     }
     public static function getImageName($slug)
     {

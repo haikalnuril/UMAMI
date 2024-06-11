@@ -9,7 +9,7 @@ class ReaderController{
         $user = $_SESSION['user'];
         $user_role = $user['role_id'];
         if($user_role == '3'){
-            view('reader/index', ['url' => 'dashboard']);
+            view('reader/index', ['url' => 'dashboard', 'recipes' => Recipe::select($_SESSION['user']['id']), 'users' => User::select($_SESSION['user']['id']), 'categories' => Category::select($_SESSION['user']['id'])]);
         }else{
             header('location: restricted');
         }
