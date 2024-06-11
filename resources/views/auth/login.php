@@ -22,7 +22,7 @@
 <body class="font-[Poppins] flex items-center justify-center w-screen h-screen">
     <div class="inline-flex rounded-lg shadow-2xl border-4 border-opacity-10 border-black w-[1000px] h-[500px]">
         <div class="relative w-[342px] h-[500px] flex flex-col justify-around">
-            <img src="assets/img/steak.png" alt="" class="h-[400px] w-[300px] absolute right-0 drop-shadow-2xl">
+            <img src="assets/img/steak.png" alt="" class="h-[400px] w-[300px] absolute -right-1 drop-shadow-2xl">
         </div>
         <div class="w-[650px] h-[500px] flex flex-col justify-center">
             <h2 class="text-2xl font-semibold text-[#FF7D29] mb-6 text-center">Login</h2>
@@ -38,12 +38,12 @@
                     </div>
                 </div>
                 <div>
-                    <button type="submit" class="w-64 flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-[#FF7D29] hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <button type="submit" class="w-64 flex justify-center py-2 px-4 rounded-lg shadow-sm border border-[#FF7D29] text-sm font-medium text-white bg-[#FF7D29] hover:bg-[#FEFFD2] hover:text-[#FF7D29] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF7D29]">
                         Login
                     </button>
                 </div>
                 <div class="text-sm text-center mt-4">
-                    Belum punya akun?<a href="<?= urlpath('register')?>" class="font-medium text-indigo-600 hover:text-indigo-500"> Register</a>
+                    Belum punya akun?<a href="<?= urlpath('register')?>" class="font-medium text-[#FF7D29] hover:text-[#EB2A29]"> Register</a>
                 </div>
             </form>
         </div>

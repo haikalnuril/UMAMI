@@ -45,7 +45,14 @@ class AuthController {
     }
     static function sessionLogin(){
         $post = array_map('htmlspecialchars', $_POST);
-
+        $requiredFields = [ 'email', 'password'];
+        foreach ($requiredFields as $field) {
+            if (empty(trim($post[$field]))) {
+                http_response_code(400);
+                echo json_encode(['message' => 'Harap isi semua kolom yang diperlukan!']);
+                exit();
+            }
+        }
         $user = User::login([
             'email' => $post['email'], 
             'password' => $post['password']
@@ -69,6 +76,53 @@ class AuthController {
             header('Location: '.BASEURL.'login?failed=true');
         }
     }
+    static function newRegister(){
+        $post = array_map('htmlspecialchars', $_POST);
+        $requiredFields = ['username', 'password', 'email', 'role_id'];
+        foreach ($requiredFields as $field) {
+            if (empty(trim($post[$field]))) {
+                http_response_code(400);
+                echo json_encode(['message' => 'Harap isi semua kolom yang diperlukan!']);
+                exit();
+            }
+        }
+        if (!filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
+            http_response_code(400);
+            echo json_encode(['message' => 'Email tidak valid!']);
+            exit();
+        }
+    
+        try {
+            $existingUser = User::findUserByUsernameOrEmail( $post[ 'username' ], $post[ 'email' ] );
+    
+            if ( $existingUser ) {
+                if ( $existingUser[ 'username' ] === $post['username'] ) {
+                    throw new Exception( 'Username already taken' );
+                }
+    
+                if ( $existingUser[ 'email' ] === $post[ 'email' ] ) {
+                    throw new Exception( 'Email already in use' );
+                }
+            }
+
+            User::register([
+                'username' => $post['username'],
+                'password' => $post[ 'password' ],
+                'email' => $post[ 'email' ],
+                'role_id' => $post[ 'role_id' ],
+                'created_at' => date( 'Y-m-d H:i:s' ),
+                'updated_at' => date( 'Y-m-d H:i:s' )
+            ]);
+    
+            exit();
+        }
+        catch ( Exception $e ) {
+            http_response_code(400);
+            echo json_encode(['message' => $e->getMessage()]);
+            exit();
+        }
+    }
+    
     static function back(){
         $user_role = $_SESSION['user']['role_id'];
         if ($user_role == '2') {

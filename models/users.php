@@ -27,19 +27,43 @@ class User
     {
         global $conn;
 
-        $name = $data['name'];
+        $name = $data['username'];
         $password = $data['password'];
         $email = $data['email'];
+        $role_id = $data['role_id'];
+        $created_at = $data['created_at'];
+        $updated_at = $data['updated_at'];
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users SET name = ?, password = ?, email = ?";
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $sql = "INSERT INTO users (username, password, email, role_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('sss', $name, $hashedPassword, $email);
+        $stmt->bind_param("sssiss", $name, $hashedPassword, $email, $role_id, $created_at, $updated_at);
         $stmt->execute();
-
-        $result = $stmt->affected_rows > 0 ? true : false;
-        return $result;
+        $stmt->close();
+        return true;
+        }
     }
+
+    public static function findUserByUsernameOrEmail( $username, $email )
+    {
+          global $conn;
+          if ($conn->connect_error) {
+              die("Koneksi gagal: " . $conn->connect_error);
+          }
+  
+          $username = $conn->real_escape_string( $username );
+          $email = $conn->real_escape_string( $email );
+  
+          $query = "SELECT username, email FROM users WHERE username = '$username' OR email = '$email' LIMIT 1";
+          $result = $conn->query( $query );
+  
+          if ( $result->num_rows > 0 ) {
+              return $result->fetch_assoc();
+          } else {
+              return null;
+          }
+      }
 
     static function getPassword($name)
     {
