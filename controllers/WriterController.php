@@ -34,7 +34,13 @@ class WriterController{
         }
     }
     static function create(){
-        view('writer/create', ['url' => 'dashboard-writer/create', 'categories' => Category::select($_SESSION['user']['id'])]);
+        $user = $_SESSION['user'];
+        $user_role = $user['role_id'];
+        if($user_role == '2'){
+            view('writer/create', ['url' => 'dashboard-writer/create', 'categories' => Category::select($_SESSION['user']['id'])]);
+        }else{
+            header('location: restricted');
+        }
     }
 
     static function store(){
@@ -103,7 +109,13 @@ class WriterController{
         }
     }
     static function edit(){
-        view('writer/edit', ['url' => 'dashboard-writer/edit', 'recipe' => Recipe::finds($_GET['slug']), 'users' => User::select($_SESSION['user']['id']), 'categories' => Category::select($_SESSION['user']['id'])]);
+        $user = $_SESSION['user'];
+        $user_role = $user['role_id'];
+        if($user_role == '2'){
+            view('writer/edit', ['url' => 'dashboard-writer/edit', 'recipe' => Recipe::finds($_GET['slug']), 'users' => User::select($_SESSION['user']['id']), 'categories' => Category::select($_SESSION['user']['id'])]);
+        }else{
+            header('location: restricted');
+        }
     }
     static function update(){
         if (!isset($_SESSION['user'])) {

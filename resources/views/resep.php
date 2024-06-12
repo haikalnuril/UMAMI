@@ -6,7 +6,12 @@
     <title>UMAMI | <?php echo $recipes[0]['judul']; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="icon" href="<?= urlpath('assets/img/umami.png') ?>">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
     <style>
@@ -72,7 +77,7 @@
                 <div class="w-10 h-9 flex bg-[#FF7D29] justify-center rounded-full items-center">
                     <img src="/img/profil.png" alt="Profile" class="w-6">
                 </div>
-                <a href="#" class="ml-4 bg-[#FF7D29] px-4 py-1 text-lg rounded-2xl text-center text-white">Log Out</a>
+                <a href="<?= urlpath('logout') ?>" class="ml-4 bg-[#FF7D29] px-4 py-1 text-lg rounded-2xl text-center text-white">Log Out</a>
             </div>
         </div>
     </header>
@@ -88,7 +93,7 @@
                         <span class="text-sm text-gray-600">Category: <?= $category[$recipes[0]['category_id']-1]['nama'] ?></span>
                     </div>
                 </header>
-                <img src="/img/food.png" alt="" class="w-96">
+                <img src="<?= urlpath('assets/images/'.$recipes[0]['gambar']) ?>" alt="" class="w-96">
             </div>
             <div class="flex-col flex w-[600px] gap-4">
     <?php
@@ -121,19 +126,19 @@
     } ?></div>
                 </div>
         <p class="font-bold text-xl">Komentar</p>
-        <form action="" method="POST">
+        <form action="<?= urlpath('resep') ?>" method="POST" id="registerForm">
             <div>
-                <input type="hidden" id="slug" name="slug" value="<?= $recipes[0]['slug']?>">
+                <input type="hidden" id="slug" name="slug" value="<?= $recipes[0]['slug'] ?>">
             </div>
             <div>
-                <input type="hidden" id="recipe_id" name="recipe_id" value="<?= $recipes[0]['id']?>">
+                <input type="hidden" id="recipe_id" name="recipe_id" value="<?= $recipes[0]['id'] ?>">
             </div>
             <div>
                 <label for="comment">Berikan Komentar Anda!</label>
                 <input type="hidden" id="komen" name="komen">
-                <trix-editor input="alat" class="mt-1 p-2 w-full bg-white border border-gray-300 rounded-md"></trix-editor>
+                <trix-editor input="komen" class="mt-1 p-2 w-full bg-white border border-gray-300 rounded-md"></trix-editor>
             </div>
-            <button type="submit" class="bg-[#FF7D29] px-4 py-1 rounded-xl border mt-5 font-semibold text-white">Kirim</button>
+            <button type="button" id="submit" class="bg-[#FF7D29] px-4 py-1 rounded-xl border mt-5 font-semibold text-white">Kirim</button>
         </form>
 
         <hr>
@@ -165,7 +170,8 @@
                 <span class="text-sm font-semibold text-gray-900 dark:text-white"><?= $users[$komen['user_id']-1]['username'] ?></span>
                 <span class="text-sm font-normal text-gray-700"><?= $formattedDate ?></span>
             </div>
-            <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white"><?= $komen['comment'] ?></p>
+            <?php $komen = html_entity_decode($komen['comment']); ?>
+            <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white"><?= strip_tags($komen) ?></p>
         </div>
         </div>
         <?php }?>
@@ -175,6 +181,49 @@
     </main>
     <footer class="bg-[#FF7D29] text-center py-4 absolute bottom w-full">
         <p class="text-white">&copy; <script>document.write(new Date().getFullYear())</script> UMAMI. All rights reserved.</p>
+        <p class='text-xs'>Shoutout to Valentino Raja PWEB, Fariq Raja Ngopag, Firman Raja React, Muza Raja Kokop</p>
     </footer>
+
+
+    <script>
+        $(document).ready(function() {
+            function sendDataToBackend() {
+
+                var form = document.getElementById('registerForm');
+                var formData = new FormData(form);
+                var slug = document.getElementById('slug').value; // Get the slug value
+                
+                console.log("Sending data to backend..."); // Debug statement
+                console.log("Form Data:", formData); // Debug statement
+                console.log("Slug:", slug); // Debug statement
+
+                $.ajax({
+                    type: 'POST',
+                    url: '<?= urlpath('resep') ?>?slug=' + slug, // Construct URL dynamically
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(data) {
+                        alert('Komentar Anda Sudah Terkirim');
+                        window.location.href = '<?= urlpath('resep') ?>?slug=' + slug; // Redirect dynamically
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error:", xhr.responseText); // Debug statement
+                        try {
+                            var response = JSON.parse(xhr.responseText);
+                            alert(response.message);
+                        } catch (e) {
+                            alert("Terjadi kesalahan, mohon coba lagi");
+                        }
+                    }
+                });
+            }
+
+            $('#submit').click(function(){
+                console.log("Submit button clicked"); // Debug statement
+                sendDataToBackend();
+            }); // Attach event handler
+        });
+    </script>
 </body>
 </html>

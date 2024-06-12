@@ -30,7 +30,7 @@
                         <div class=" w-10 h-9 flex bg-[#FF7D29] px-10 py-5 justify-center rounded-full items-center">
                             <p class="text-white font"><?= $_SESSION['user']['username'] ?></p>
                         </div>
-                        <a href="" class="mx-4 bg-[#FF7D29] px-4 py-1 text-lg rounded-2xl text-center text-white ">Log Out</a>
+                        <a href="<?= urlpath('logout') ?>" class="mx-4 bg-[#FF7D29] px-4 py-1 text-lg rounded-2xl text-center text-white ">Log Out</a>
                     </div>
                 </nav>
             </div>

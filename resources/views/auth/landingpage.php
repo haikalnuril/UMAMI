@@ -17,7 +17,7 @@
     <header class="text-black py-6 font-[Poppins]">
         <div class=" fixed shadow-xl top-0 py-6 w-screen mx-auto flex justify-between items-center">
             <nav>
-                <img src="/img/food.png" class="w-12 mx-10 my-auto" alt="">
+                <img src="assets/img/food.png" class="w-12 mx-10 my-auto" alt="">
             </nav>
             <nav class="px-6 " id="navbar-text">
                 <a href="/" class="text-black mx-4 focus-visible:text-orange-300 active:text-orange-300 navbar-links" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Home</a>
@@ -39,7 +39,7 @@
                     <a href="" class="bg-[#FF7D29] px-5 py-1 rounded-2xl text-white w-20 ">Menu</a>
                 </div>
                 <div>
-                    <img src="/img/food.png" class="w-[600px]" alt="">
+                    <img src="assets/img/food.png" class="w-[600px]" alt="">
                 </div>
             </div>
         </section>
@@ -48,23 +48,23 @@
                 <h2 class="text-3xl font-bold mb-8 text-[#FEFFD2] font-[Poppins]">Features</h2>
                 <div class="inline-flex gap-8 px-6 font-[Poppins] font-semibold">
                     <div class="flex flex-col gap-3 justify-between rounded-xl p-6 bg-[#FEFFD2] shadow-md">
-                        <img src="/img/appetizer.png" alt="" class="w-56">
+                        <img src="assets/img/appetizer.png" alt="" class="w-56">
                         <p>Appetizer</p>
                     </div>
                     <div class="flex flex-col gap-3 justify-between rounded-xl p-6 bg-[#FEFFD2] shadow-md">
-                        <img src="/img/maincourse.png" alt="" class="w-56">
+                        <img src="assets/img/maincourse.png" alt="" class="w-56">
                         <p>Maincourse</p>
                     </div>
                     <div class="flex flex-col gap-3 justify-between rounded-xl p-6 bg-[#FEFFD2] shadow-md">
-                        <img src="/img/cake.png" alt="" class="h-52 ">
+                        <img src="assets/img/cake.png" alt="" class="h-52 ">
                         <p>Dessert</p>
                     </div>
                     <div class="flex flex-col gap-3 items-center rounded-xl p-6 bg-[#FEFFD2] shadow-md">
-                        <img src="/img/drink.png" alt="" class="w-56">
+                        <img src="assets/img/drink.png" alt="" class="w-56">
                         <p>Drink</p>
                     </div>
                     <div class="flex flex-col gap-3 justify-between rounded-xl p-6 bg-[#FEFFD2] shadow-md">
-                        <img src="/img/maincourse.png" alt="" class="w-56">
+                        <img src="assets/img/maincourse.png" alt="" class="w-56">
                         <p>Lainnya</p>
                     </div>
                 </div>

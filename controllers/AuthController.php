@@ -16,26 +16,34 @@ class AuthController {
         view('restricted',['url'=> 'restricted']);
     }
     static function resep(){
+        if (!isset($_SESSION['user'])) {
+            header('Location: restricted');
+        }
         view('resep',['url'=> 'resep', 'recipes' => Recipe::finds($_GET['slug']), 'users' => User::select($_SESSION['user']['id']), 'category' => Category::select($_SESSION['user']['id']), 'comments' => Comment::select($_SESSION['user']['id'])]);
     }
-    static function comment(){
+    static function comment() {
         if (!isset($_SESSION['user'])) {
-            header('Location: login');
-        }else{
-            $post = array_map('htmlspecialchars', $_POST);
-            $comment = Comment::insert(
-                $post['recipe_id'],
-                $_SESSION['user']['id'],
-                $post['komen'],
-                date('Y-m-d H:i:s')
-            );
-            if ($comment) {
-                header('Location: resep?slug='.$post['slug']);
-                exit();
-            }else{
-                echo ('Terjadi Kesalahan');
-            }
+            http_response_code(401); // Unauthorized
+            echo json_encode(['message' => 'Unauthorized']);
+            exit();
         }
+    
+        $post = array_map('htmlspecialchars', $_POST);
+        $comment = Comment::insert(
+            $post['recipe_id'],
+            $_SESSION['user']['id'],
+            $post['komen'],
+            date('Y-m-d H:i:s')
+        );
+    
+        if ($comment) {
+            echo json_encode(['success'=> true]);
+            // throw new Exception('Komentar Anda Sudah Terkirim');
+        } else {
+            http_response_code(500); // Internal Server Error
+            echo json_encode(['message' => 'Terjadi Kesalahan']);
+        }
+        exit();
     }
     static function login(){
         view('auth/login', ['url' => 'login']);
@@ -105,7 +113,7 @@ class AuthController {
                 }
             }
 
-            User::register([
+            $register = User::register([
                 'username' => $post['username'],
                 'password' => $post[ 'password' ],
                 'email' => $post[ 'email' ],
@@ -113,12 +121,25 @@ class AuthController {
                 'created_at' => date( 'Y-m-d H:i:s' ),
                 'updated_at' => date( 'Y-m-d H:i:s' )
             ]);
-    
+            if ($register) {
+                echo json_encode(['success'=> true]);
+                // throw new Exception('Komentar Anda Sudah Terkirim');
+            } else {
+                http_response_code(500); // Internal Server Error
+                echo json_encode(['message' => 'Terjadi Kesalahan']);
+            }
             exit();
         }
-        catch ( Exception $e ) {
+        catch (Exception $e) {
             http_response_code(400);
-            echo json_encode(['message' => $e->getMessage()]);
+
+            if ($e->getMessage() === 'Username already taken') {
+                echo json_encode(['message' => 'Username sudah digunakan. Silahkan gunakan username lainnya!']);
+            } elseif ($e->getMessage() === 'Email already in use') {
+                echo json_encode(['message' => 'Email sudah digunakan. Silahkan gunakan Email lainnya!']);
+            } else {
+                echo json_encode(['message' => 'Terjadi kesalahan, mohon coba lagi.']);
+            }
             exit();
         }
     }
@@ -137,5 +158,16 @@ class AuthController {
         else {
             header('Location:' .BASEURL. 'index');
         }
+    }
+    static function logout()
+    {
+        if (ini_get('session.use_cookies')) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
+        }
+        session_destroy();
+
+        header('Location: index');
+        exit();
     }
 }
