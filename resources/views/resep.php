@@ -68,12 +68,12 @@
                 <img src="assets/img/umami.png" class="w-24 mx-10" alt="Umami Logo">
             </div>
             <nav class="flex space-x-4">
-                <a href="#" class="text-black focus-visible:text-orange-300 active:text-orange-300 navbar-links" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Home</a>
+                    <a href="<?= urlpath('index') ?>" class="text-black mx-4 focus-visible:text-orange-300 active:text-orange-300 hover:text-orange-300 navbar-links" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Home</a>
                 <a href="#features" class="text-black focus-visible:text-orange-300 active:text-orange-300 navbar-links" id="link-features">Appetizer</a>
                 <a href="#about" class="text-black navbar-links" id="link-about">Maincourse</a>
                 <a href="#contact" class="text-black navbar-links" id="link-home">Dessert</a>
             </nav>
-            <div class="inline-flex mx-8 items-center">
+            <div class="inline-flex mx-8 items-center mr-3">
                 <div class="w-10 h-9 flex bg-[#FF7D29] justify-center rounded-full items-center">
                     <img src="/img/profil.png" alt="Profile" class="w-6">
                 </div>

@@ -10,6 +10,7 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="<?= urlpath('assets/img/umami.png') ?>">
     <style>
         body {
             background-image: url('assets/img/background.png'); /* Replace with your image URL */

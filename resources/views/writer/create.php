@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="<?= urlpath('assets/img/umami.png') ?>">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
     <style>
@@ -62,15 +63,15 @@
                 <img src="assets/img/umami.png" class="w-24 mx-10 my-auto" alt="">
             </nav>
             <nav class="px-6 " id="navbar-text">
-                <a href="#" class="text-black mx-4 focus-visible:text-orange-300 active:text-orange-300 navbar-links" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Home</a>
+                   <a href="<?= urlpath('index') ?>" class="text-black mx-4 focus-visible:text-orange-300 active:text-orange-300 hover:text-orange-300 navbar-links" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Home</a>
                 <a href="#features" class="text-black focus-visible:text-orange-300 active:text-orange-300 mx-4 navbar-links" id="link-features">Appetizer</a>
                 <a href="#about" class="text-black mx-4 navbar-links" id="link-about" >Maincourse</a>
                 <a href="#contact" class="text-black mx-4 navbar-links" id="link-home">Desert</a>
             </nav>
             <nav>
-                <div class="inline-flex">
-                    <div class=" w-10 h-9 flex bg-[#FF7D29] justify-center rounded-full items-center">
-                        <img src="/img/profil.png" alt="" class="w-6 bg">
+                <div class="inline-flex mr-3">
+                    <div class=" w-10 h-9 flex bg-[#FF7D29] px-10 py-5 justify-center rounded-full items-center">
+                        <p class="text-white font"><?= $_SESSION['user']['username'] ?></p>
                     </div>
                     <a href="<?= urlpath('logout') ?>" class="mx-4 bg-[#FF7D29] px-4 py-1 text-lg rounded-2xl text-center text-white ">Log Out</a>
                 </div>

@@ -7,6 +7,7 @@
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
         <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="icon" href="<?= urlpath('assets/img/umami.png') ?>">
         <style>
             .navbar-links {
                 transition: color 0.3s ease;
@@ -20,7 +21,7 @@
                     <img src="assets/img/umami.png" class="w-24 mx-10 my-auto" alt="">
                 </nav>
                 <nav class="px-6 " id="navbar-text">
-                    <a href="#" class="text-black mx-4 focus-visible:text-orange-300 active:text-orange-300 navbar-links" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Home</a>
+                       <a href="<?= urlpath('index') ?>" class="text-black mx-4 focus-visible:text-orange-300 active:text-orange-300 hover:text-orange-300 navbar-links" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Home</a>
                     <a href="#features" class="text-black focus-visible:text-orange-300 active:text-orange-300 mx-4 navbar-links" id="link-features">Appetizer</a>
                     <a href="#about" class="text-black mx-4 navbar-links" id="link-about" >Maincourse</a>
                     <a href="#contact" class="text-black mx-4 navbar-links" id="link-home">Desert</a>
