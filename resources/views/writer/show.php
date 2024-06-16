@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unique Landing Page</title>
+    <title>UMAMI | YOUR POST</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -66,7 +66,7 @@
                     <div class=" w-10 h-9 flex bg-[#FF7D29] px-10 py-5 justify-center rounded-full items-center">
                         <p class="text-white font"><?= $_SESSION['user']['username'] ?></p>
                     </div>
-                    <a href="<?= urlpath('logout') ?>" class="mx-4 bg-[#FF7D29] px-4 py-1 text-lg rounded-2xl text-center text-white ">Log Out</a>
+                    <a href="<?= urlpath('logout') ?>" class="mx-4 bg-[#FF7D29] px-4 py-1 text-lg rounded-2xl text-center text-white hover:bg-[#EB2A29]">Log Out</a>
                 </div>
             </nav>
         </div>
@@ -75,7 +75,7 @@
         <section class="bg-[#FEFFD2] flex items-center justify-center min-h-screen" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div class="container relative mx-auto px-4">
                 <h2 class="text-3xl font-bold text-center mb-6 text-[#FF7D29]">Daftar Resep Kamu</h2>
-                <a href="<?= urlpath('dashboard-writer/create') ?>" class="mx-4 bg-[#FF7D29] px-4 py-1 text-lg rounded-2xl text-center text-white ">Tambah Resep</a>
+                <a href="<?= urlpath('dashboard-writer/create') ?>" class="mx-4 bg-[#FF7D29] px-4 py-1 text-lg rounded-2xl text-center text-white hover:bg-[#EB2A29]">Tambah Resep</a>
                 <table class="cute-table mt-2 w-full text-center rounded-lg shadow-lg">
                     <thead>
                         <tr>

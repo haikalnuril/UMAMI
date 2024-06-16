@@ -28,7 +28,7 @@
                     <p class="text-white"><?= $_SESSION['user']['username'] ?></p>
                 </div>
                 <a href="<?= urlpath('back') ?>" class="px-5 absolute top-[15vh] left-[5vh]">< Kembali</a>
-                <a href="<?= urlpath('logout') ?>" class="ml-4 bg-[#FF7D29] px-4 py-1 text-lg rounded-2xl text-center text-white">Log Out</a>
+                <a href="<?= urlpath('logout') ?>" class="ml-4 bg-[#FF7D29] px-4 py-1 text-lg rounded-2xl text-center text-white hover:bg-[#EB2A29]">Log Out</a>
             </div>
         </div>
     </header>

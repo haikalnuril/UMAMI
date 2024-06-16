@@ -18,7 +18,7 @@
     <header class="text-black py-6 font-[Poppins]">
         <div class=" fixed shadow-xl top-0 py-6 w-screen mx-auto flex justify-between items-center">
             <nav>
-                <img src="assets/img/food.png" class="w-12 mx-10 my-auto" alt="">
+                <img src="assets/img/umami.png" class="w-24 mx-10 my-auto" alt="">
             </nav>
             <nav class="px-6 " id="navbar-text">
                 <a href="/" class="text-black mx-4 focus-visible:text-orange-300 active:text-orange-300 navbar-links" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Home</a>
@@ -27,7 +27,7 @@
                 <a href="#contact" class="text-black mx-4 navbar-links" id="link-home">Desert</a>
             </nav>
             <nav>
-                <a href="<?= urlpath('login') ?>" class="mx-10 bg-[#FF7D29] px-4 py-1 rounded-2xl text-white">Masuk</a>
+                <a href="<?= urlpath('login') ?>" class="mx-10 bg-[#FF7D29] px-4 py-1 rounded-2xl text-white hover:bg-[#EB2A29]">Masuk</a>
             </nav>
         </div>
     </header>
@@ -37,7 +37,12 @@
                 <div class=" px-20 flex flex-col">
                     <h1 class="text-5xl text-black font-bold mb-4">Selamat Datang di <span class="text-[#FF7D29]">UMAMI</span></h1>
                     <p class="text-lg mb-4 w-[600px] text-black">Di UMAMI, kami mengajak Anda untuk menjelajahi ragam kuliner yang kaya dan penuh cita rasa. Dari resep tradisional yang otentik hingga kreasi modern yang inovatif, kami menghadirkan berbagai inspirasi untuk memanjakan lidah Anda.</p>
-                    <a href="" class="bg-[#FF7D29] px-5 py-1 rounded-2xl text-white w-20 ">Menu</a>
+                    <?php if(isset($_SESSION['user'])){
+                        ?>
+                        <a href="<?= urlpath('back') ?>" class="bg-[#FF7D29] px-5 py-2 rounded-2xl text-white w-40 text-center ">Dashboard</a>
+                    <?php } else{?>
+                        <a href="" class="bg-[#FF7D29] px-5 py-1 rounded-2xl text-white w-20 hover:bg-[#EB2A29]">Menu</a>
+                    <?php } ?>
                 </div>
                 <div>
                     <img src="assets/img/food.png" class="w-[600px]" alt="">

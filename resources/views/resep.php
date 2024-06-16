@@ -68,16 +68,16 @@
                 <img src="assets/img/umami.png" class="w-24 mx-10" alt="Umami Logo">
             </div>
             <nav class="flex space-x-4">
-                    <a href="<?= urlpath('index') ?>" class="text-black mx-4 focus-visible:text-orange-300 active:text-orange-300 hover:text-orange-300 navbar-links" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Home</a>
+                <a href="<?= urlpath('index') ?>" class="text-black mx-4 focus-visible:text-orange-300 active:text-orange-300 hover:text-orange-300 navbar-links" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Home</a>
                 <a href="#features" class="text-black focus-visible:text-orange-300 active:text-orange-300 navbar-links" id="link-features">Appetizer</a>
                 <a href="#about" class="text-black navbar-links" id="link-about">Maincourse</a>
                 <a href="#contact" class="text-black navbar-links" id="link-home">Dessert</a>
             </nav>
             <div class="inline-flex mx-8 items-center mr-3">
-                <div class="w-10 h-9 flex bg-[#FF7D29] justify-center rounded-full items-center">
-                    <img src="/img/profil.png" alt="Profile" class="w-6">
+                <div class=" w-10 h-9 flex bg-[#FF7D29] px-10 py-5 justify-center rounded-full items-center">
+                    <p class="text-white font"><?= $_SESSION['user']['username'] ?></p>
                 </div>
-                <a href="<?= urlpath('logout') ?>" class="ml-4 bg-[#FF7D29] px-4 py-1 text-lg rounded-2xl text-center text-white">Log Out</a>
+                <a href="<?= urlpath('logout') ?>" class="ml-4 bg-[#FF7D29] px-4 py-1 text-lg rounded-2xl text-center text-white hover:bg-[#EB2A29]">Log Out</a>
             </div>
         </div>
     </header>
@@ -93,7 +93,7 @@
                         <span class="text-sm text-gray-600">Category: <?= $category[$recipes[0]['category_id']-1]['nama'] ?></span>
                     </div>
                 </header>
-                <img src="<?= urlpath('assets/images/'.$recipes[0]['gambar']) ?>" alt="" class="w-96">
+                <img src="<?= urlpath('assets/images/'.$recipes[0]['gambar']) ?>" alt="" class="max-w-[600px]">
             </div>
             <div class="flex-col flex w-[600px] gap-4">
     <?php
@@ -107,6 +107,7 @@
     $i = 1;
     foreach($alat as $alatBahan) {
         $alatBahan = html_entity_decode($alatBahan);
+        $alatBahan = preg_replace('/\d+\.\s/', '', $alatBahan);
         $alatBahan = preg_replace('/^\s*\d+\.\s/', '', $alatBahan);
         ?>
         <p><?= $i ?>. <?= strip_tags($alatBahan) ?></p>
@@ -119,6 +120,7 @@
     $i = 1;
     foreach($langkah as $langkah2) {
         $langkah2 = html_entity_decode($langkah2);
+        $langkah2 = preg_replace('/\d+\.\s/', '', $langkah2);
         $langkah2 = preg_replace('/^\s*\d+\.\s/', '', $langkah2);
         ?>
         <p><?= $i ?>. <?= strip_tags($langkah2) ?></p>

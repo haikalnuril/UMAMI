@@ -73,7 +73,7 @@
                     <div class=" w-10 h-9 flex bg-[#FF7D29] px-10 py-5 justify-center rounded-full items-center">
                         <p class="text-white font"><?= $_SESSION['user']['username'] ?></p>
                     </div>
-                    <a href="<?= urlpath('logout') ?>" class="mx-4 bg-[#FF7D29] px-4 py-1 text-lg rounded-2xl text-center text-white ">Log Out</a>
+                    <a href="<?= urlpath('logout') ?>" class="mx-4 bg-[#FF7D29] px-4 py-1 text-lg rounded-2xl text-center text-white hover:bg-[#EB2A29]">Log Out</a>
                 </div>
             </nav>
         </div>
@@ -112,6 +112,7 @@
                         <!-- <textarea id="steps" name="steps" rows="2" class="mt-1 p-2 w-full border border-gray-300 rounded-md" required></textarea> -->
                     </div>
                     <div>
+                        <label for="thumbnail" class="block text-sm font-medium text-gray-700 mb-5">Gambar Makanan</label>
                         <img class="" id="frame">
                         <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="gambar" name="gambar" type="file" onchange="preview()">
                     </div>

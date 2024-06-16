@@ -31,7 +31,7 @@
                         <div class=" w-10 h-9 flex bg-[#FF7D29] px-10 justify-center rounded-full items-center">
                             <p class="text-white"><?= $_SESSION['user']['username'] ?></p>
                         </div>
-                        <a href="<?= urlpath('logout') ?>" class="mx-4 bg-[#FF7D29] px-4 py-1 text-lg rounded-2xl text-center text-white ">Log Out</a>
+                        <a href="<?= urlpath('logout') ?>" class="mx-4 bg-[#FF7D29] px-4 py-1 text-lg rounded-2xl text-center text-white hover:bg-[#EB2A29]">Log Out</a>
                     </div>
                 </nav>
             </div>
@@ -53,11 +53,11 @@
                 <h1 class="font-bold text-4xl text-center text-[#FEFFD2] mb-10">Recipes</h1>
                 <div class="container mx-auto gap-5 grid grid-cols-2">
                     <?php foreach($recipes as $recipe){?>
-                    <div class="px-6 ">
+                    <div class="px-6 ml-16 group">
                         <a href="<?= urlpath('resep?slug='.$recipe['slug']) ?>" class="flex flex-col h-[24vh] items-center bg-white border relative border-gray-200  rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100  dark:bg-[#FEFFD2] dark:hover:bg-[#FF7D29] ">
                             <img class=" rounded-t-lg h-full md:h-full md:w-52 object-cover md:rounded-none md:rounded-s-lg" src="<?= urlpath('assets/images/'.$recipe['gambar']) ?>" alt="">
                             <div class="flex flex-col justify-between px-4 leading-normal ">
-                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-[#FF7D29] "><?= $recipe['judul'] ?></h5>
+                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-[#FF7D29] group-hover:text-[#FEFFD2]"><?= $recipe['judul'] ?></h5>
                                 <p class="mb-1 font-normal text-gray-700 dark:text-gray-800"><?= $users[$recipe['penulis']-1]['username']?></p>
                                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-800"><?= $categories[$recipe['category_id']-1]['nama'] ?></p>
                             </div>

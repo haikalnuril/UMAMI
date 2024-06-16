@@ -21,7 +21,7 @@
 <body class="font-[Poppins] flex items-center justify-center w-screen h-screen">
     <div class="inline-flex rounded-lg shadow-2xl border-4 border-opacity-10 border-black w-[1000px] h-[500px]">
         <div class="relative w-[342px] h-[500px] flex flex-col justify-around">
-            <img src="assets/img/steak.png" alt="" class="h-[400px] w-[300px] -right-1 absolute drop-shadow-2xl">
+            <img src="assets/img/steak.png" alt="" class="h-[400px] w-[300px] right-0 absolute drop-shadow-2xl">
         </div>
         <div class="w-[650px] h-[500px] flex flex-col justify-center">
             <h2 class="text-2xl font-semibold text-[#FF7D29] mb-6 text-center">Register</h2>
